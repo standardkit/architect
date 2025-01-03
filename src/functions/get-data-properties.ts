@@ -1,11 +1,11 @@
 import { EntityKey, EntityMetadata, EntityProperty, MetadataStorage, ReferenceKind } from '@mikro-orm/core';
 import { Type } from '@nestjs/common';
+import { entries, KeyOf } from '@standardkit/core';
 import { Method } from '../constants';
 import { getPropertyMetadata } from '../decorators';
 import { PropertyOptions } from '../interfaces';
 import { DataProperties } from '../types';
 import { getPropertyType } from './get-property-type';
-import { entries, KeyOf } from '@standardkit/core';
 
 function hasDefault<Entity>(entity: Type<Entity>, field: EntityKey<Entity>): boolean {
   return entity.toString().includes(`this.${field} =`);

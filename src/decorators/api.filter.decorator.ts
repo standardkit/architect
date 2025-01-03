@@ -1,12 +1,12 @@
 import { applyDecorators, Type, UsePipes } from '@nestjs/common';
 import { ApiQuery } from '@nestjs/swagger';
+import { entries, FilterOperator, KeyOf } from '@standardkit/core';
 import { Relation } from '../constants';
 import { getDataProperties, getFilterableRelations } from '../functions';
 import { getRelationField } from '../functions/get-relation-field';
 import { DataPropertyOptions, DataRelationOptions } from '../interfaces';
 import { FilterValidationPipe } from '../pipes';
 import { DataProperties, RawFilter, RelationType, ScopeType } from '../types';
-import { entries, FilterOperator, KeyOf } from '@standardkit/core';
 
 const ENUM_FILTERS = [
   FilterOperator.All,
@@ -22,6 +22,57 @@ const RANGE_FILTERS = [
   FilterOperator.LessThan,
   FilterOperator.LessThanOrEquals,
 ];
+
+function getSimpleExample<Entity>(options: DataPropertyOptions<Entity>): string {
+  return options.enum ? Object.values(options.enum).join(',') : ['example1', 'example2'].join(',');
+}
+
+function getDescription(options: DataPropertyOptions<any>): string {
+  const baseDescription = 'Filter operators:';
+  const filters: string[] = [];
+
+  if (options.enum) {
+    filters.push(...ENUM_FILTERS);
+
+    return `${baseDescription} '${filters.join("', '")}'. ; Values: ${Object.values(options.enum ?? [])?.join(', ')}`;
+  }
+
+  if (options.type === Number || options.type === Date) {
+    filters.push(...RANGE_FILTERS);
+
+    return `${baseDescription} '${filters.join("', '")}'`;
+  }
+}
+
+// TODO : Get example from options?
+function getSimpleDescription(options: DataPropertyOptions<any>): string {
+  return (
+    `Default equality filter (comparable to 'eq' and 'in'). You can omit the empty brackets. Possible values: ` +
+    Object.values(options.enum ?? ['example1', 'example2'])?.join(', ')
+  );
+}
+
+function getExample<Entity>(options: DataPropertyOptions<Entity>): RawFilter {
+  if (options.enum) {
+    const values = options.enum ? Object.values(options.enum).join(',') : ['example1', 'example2'].join(',');
+    const value = options.enum ? Object.values(options.enum)[0] : 'example1';
+
+    return { all: values, in: values, nin: values, eq: value, neq: value };
+  }
+
+  switch (options.type) {
+    case Number:
+      return { gte: 1, lte: 10, gt: 0, lt: 11 };
+    case Date:
+      const year: number = new Date().getFullYear();
+      const start: string = new Date(Date.UTC(year, 0, 1, 0, 0, 0, 0)).toISOString();
+      const end: string = new Date(Date.UTC(year, 11, 31, 23, 59, 59, 999)).toISOString();
+
+      return { gt: start, gte: start, lt: end, lte: end };
+  }
+
+  return {};
+}
 
 function createObjectPropertyDecorator<Entity>(
   field: KeyOf<Entity>,
@@ -93,55 +144,4 @@ export function ApiFilter<Entity>(entity: Type<Entity>, scope: ScopeType<Entity>
   );
 
   return applyDecorators(...decorators, ...relationDecorators, UsePipes(new FilterValidationPipe(entity)));
-}
-
-function getExample<Entity>(options: DataPropertyOptions<Entity>): RawFilter {
-  if (options.enum) {
-    const values = options.enum ? Object.values(options.enum).join(',') : ['example1', 'example2'].join(',');
-    const value = options.enum ? Object.values(options.enum)[0] : 'example1';
-
-    return { all: values, in: values, nin: values, eq: value, neq: value };
-  }
-
-  switch (options.type) {
-    case Number:
-      return { gte: 1, lte: 10, gt: 0, lt: 11 };
-    case Date:
-      const year = new Date().getFullYear();
-      const start = new Date(Date.UTC(year, 0, 1, 0, 0, 0, 0)).toISOString();
-      const end = new Date(Date.UTC(year, 11, 31, 23, 59, 59, 999)).toISOString();
-
-      return { gt: start, gte: start, lt: end, lte: end };
-  }
-
-  return {};
-}
-
-function getSimpleExample<Entity>(options: DataPropertyOptions<Entity>): string {
-  return options.enum ? Object.values(options.enum).join(',') : ['example1', 'example2'].join(',');
-}
-
-function getDescription(options: DataPropertyOptions<any>): string {
-  const baseDescription = 'Filter operators:';
-  const filters: string[] = [];
-
-  if (options.enum) {
-    filters.push(...ENUM_FILTERS);
-
-    return `${baseDescription} '${filters.join("', '")}'. ; Values: ${Object.values(options.enum ?? [])?.join(', ')}`;
-  }
-
-  if (options.type === Number || options.type === Date) {
-    filters.push(...RANGE_FILTERS);
-
-    return `${baseDescription} '${filters.join("', '")}'`;
-  }
-}
-
-// TODO : Get example from options?
-function getSimpleDescription(options: DataPropertyOptions<any>): string {
-  return (
-    `Default equality filter (comparable to 'eq' and 'in'). You can omit the empty brackets. Possible values: ` +
-    Object.values(options.enum ?? ['example1', 'example2'])?.join(', ')
-  );
 }

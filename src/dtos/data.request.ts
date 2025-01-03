@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { SortOrderType } from '@standardkit/core';
 import { Type } from 'class-transformer';
 import { IsInt, IsObject, IsOptional, Min, Validate } from 'class-validator';
 import { IsSortable } from '../decorators';
 import { IsMultipleOfLimitValidator } from '../validators';
 import { FilterOption } from './filter.option';
-import { SortOrderType } from '@standardkit/core';
 
 export class DataRequest<Entity> {
   constructor(entity: new () => Entity) {

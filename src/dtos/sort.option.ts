@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum } from 'class-validator';
 import { SortOrder, SortOrderType } from '@standardkit/core';
+import { IsEnum } from 'class-validator';
 
 export class SortOption<T> {
   @ApiProperty({ description: 'Key of the field you wish to sort by', example: 'status' })

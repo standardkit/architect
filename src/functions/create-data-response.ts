@@ -1,7 +1,7 @@
 import { Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { DataResponse } from '../interfaces';
 import { createEntityResponse, Metadata, Method } from '@standardkit/nest-architect';
+import { DataResponse } from '../interfaces';
 
 export function createDataResponse<T>(entity: Type<T>, entityName: string): Type<DataResponse<T>> {
   class DataResponseClass {

@@ -1,10 +1,10 @@
 import { Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { entries } from '@standardkit/core';
 import { Method } from '../constants';
 import { DataProperties, MethodType } from '../types';
 import { getDataProperties } from './get-data-properties';
 import { trueOrMethodIncluded } from './method-option.helpers';
-import { entries } from '@standardkit/core';
 
 export function defineResponseDataProperties<Entity>(
   request: Type,

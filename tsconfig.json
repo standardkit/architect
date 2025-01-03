@@ -4,12 +4,15 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "outDir": "./dist",
+    "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "removeComments": true,
     "declaration": true,
+    "incremental": true,
     "paths": {
       "@standardkit/nest-architect": ["./src"]
     }

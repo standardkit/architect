@@ -1,5 +1,5 @@
 import { RawFilters } from '@standardkit/nest-architect';
 
-export type FilteredRequestType<Entity> = {
+export interface FilteredRequestType<Entity> {
   filter?: RawFilters<Entity>;
-};
+}

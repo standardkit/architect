@@ -1,12 +1,12 @@
 import { Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { entries } from '@standardkit/core';
 import { Method } from '../constants';
 import { DataRelations, MethodType } from '../types';
 import { createEntityResponse } from './create-entity-response';
 import { getDataRelations } from './get-data-relations';
 import { getRelationField } from './get-relation-field';
 import { trueOrMethodIncluded } from './method-option.helpers';
-import { entries } from '@standardkit/core';
 
 export function defineResponseRelations<Entity>(
   response: Type,

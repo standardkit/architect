@@ -1,4 +1,5 @@
 import { Type } from '@nestjs/common';
+import { entries } from '@standardkit/core';
 import { Method, Relation } from '../constants';
 import { DataRelations, MethodType, ScopeType } from '../types';
 import { defineRelateById } from './define-relate-by-id';
@@ -6,7 +7,6 @@ import { defineRelateByIds } from './define-relate-by-ids.function';
 import { getDataRelations } from './get-data-relations';
 import { getScopedFields } from './get-scoped-fields';
 import { trueOrMethod } from './method-option.helpers';
-import { entries } from '@standardkit/core';
 
 export function defineRequestRelations<Entity>(
   request: Type,

@@ -1,8 +1,8 @@
 import { Type } from '@nestjs/common';
-import { defineResponseDataProperties } from './define-response-properties';
-import { defineResponseRelations } from './define-response-relations';
 import { capitalize } from '@standardkit/caas';
 import { Method, MethodType } from '@standardkit/nest-architect';
+import { defineResponseDataProperties } from './define-response-properties';
+import { defineResponseRelations } from './define-response-relations';
 
 function getClassName(entityName: string, method: Omit<MethodType, typeof Method.Delete>): string {
   switch (method) {

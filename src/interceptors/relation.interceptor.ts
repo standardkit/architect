@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, Inject, Injectable, NestInterceptor } from '@nestjs/common';
+import { ScopedRelations } from '@standardkit/nest-architect';
 import { RelationService } from '../services';
 import { LOAD_RELATIONS_TOKEN } from '../tokens';
-import { ScopedRelations } from '@standardkit/nest-architect';
 
 @Injectable()
 export class RelationInterceptor implements NestInterceptor {

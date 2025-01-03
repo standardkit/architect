@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { FilterOperator, FilterOperatorType } from '@standardkit/core';
 import { IsEnum, IsNotEmpty } from 'class-validator';
 import { FilterValueType } from '../types';
-import { FilterOperator, FilterOperatorType } from '@standardkit/core';
 
 export class FilterOption<T> {
   @ApiProperty({

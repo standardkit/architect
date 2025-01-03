@@ -1,11 +1,11 @@
 import { Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { KeyOf } from '@standardkit/core';
 import { IsOptional, IsString } from 'class-validator';
 import { Method } from '../constants';
 import { DataRelationOptions } from '../interfaces';
 import { MethodType } from '../types';
 import { trueOrMethod } from './method-option.helpers';
-import { KeyOf } from '@standardkit/core';
 
 export function defineRelateById<Entity, Key extends KeyOf<Entity>>(
   request: Type,

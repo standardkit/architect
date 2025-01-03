@@ -1,5 +1,5 @@
-import { MethodType, ScopeType } from '../types';
 import { List } from '@standardkit/core';
+import { MethodType, ScopeType } from '../types';
 
 export interface ControllerOptions<Entity> {
   exclude?: MethodType[];

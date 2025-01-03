@@ -1,5 +1,6 @@
 import { EntityManager, ExpandQuery, FilterQuery, FindOptions, Reference } from '@mikro-orm/core';
 import { Injectable, Type } from '@nestjs/common';
+import { entries, FilterOperator, FilterOperatorType, KeyOf, List } from '@standardkit/core';
 import { Method, OrmOperator, Relation } from '../constants';
 import { DataRequest, FilterOption, PaginationMeta } from '../dtos';
 import { getDataRelations, getPopulatedFields, trueOrMethod } from '../functions';
@@ -8,7 +9,6 @@ import { getScopedFields } from '../functions/get-scoped-fields';
 import { DataRelationOptions, DataResponse } from '../interfaces';
 import { DataRelations, IdType, MethodType, OrmOperatorType, ScopeType } from '../types';
 import { RelationService } from './relation.service';
-import { entries, FilterOperator, FilterOperatorType, KeyOf, List } from '@standardkit/core';
 
 @Injectable()
 export class EntityService {
@@ -217,7 +217,7 @@ export class EntityService {
   private createRelateByIdReference<Entity>(request: object, field: string, options: DataRelationOptions): Entity {
     const key = `${field}Id`;
 
-    if (request.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(request, key)) {
       return this.entityManager.getReference(options.type, { id: request[key] });
     }
   }
@@ -230,7 +230,7 @@ export class EntityService {
     const name = getRelationField(field, options);
     const key = `${name}Ids`;
 
-    if (request.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(request, key)) {
       return request[key].map((id: string) => this.entityManager.getReference(options.type, id));
     }
   }

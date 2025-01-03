@@ -1,8 +1,8 @@
 import { Type } from '@nestjs/common';
+import { entries, fromEntries } from '@standardkit/core';
 import { DataRelations, ScopeType } from '../types';
 import { getDataRelations } from './get-data-relations';
 import { getScopedFields } from './get-scoped-fields';
-import { entries, fromEntries } from '@standardkit/core';
 
 export function getFilterableRelations<Entity>(
   entity: Type<Entity>,

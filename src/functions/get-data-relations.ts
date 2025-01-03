@@ -1,10 +1,10 @@
 import { EntityMetadata, MetadataStorage, ReferenceKind } from '@mikro-orm/core';
 import { Type } from '@nestjs/common';
+import { entries, KeyOf } from '@standardkit/core';
 import { Method, Relation } from '../constants';
 import { getRelationMetadata } from '../decorators';
 import { RelationOptions } from '../interfaces';
 import { DataRelations, RelationType } from '../types';
-import { entries, KeyOf } from '@standardkit/core';
 
 const RELATION_KINDS: ReferenceKind[] = [
   ReferenceKind.ONE_TO_ONE,

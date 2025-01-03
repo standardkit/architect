@@ -1,5 +1,5 @@
-import { Method } from '../constants';
 import { MethodType, SortOptions } from '@standardkit/nest-architect';
+import { Method } from '../constants';
 
 export interface PropertyOptions<T> {
   // Documentation

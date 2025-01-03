@@ -1,6 +1,6 @@
 import { Type } from '@nestjs/common';
-import { MethodType, ScopeType } from '../types';
 import { KeyOf } from '@standardkit/core';
+import { MethodType, ScopeType } from '../types';
 
 export interface ChildControllerOptions<Parent, Entity, Junction = any> {
   // Junctions

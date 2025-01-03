@@ -1,7 +1,7 @@
 import { Type } from '@nestjs/common';
+import { KeyOf } from '@standardkit/core';
 import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { getSortableFields } from '../functions';
-import { KeyOf } from '@standardkit/core';
 
 @ValidatorConstraint({ name: 'isSortable', async: false })
 export class IsSortableValidator<Entity> implements ValidatorConstraintInterface {

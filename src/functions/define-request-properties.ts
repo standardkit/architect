@@ -1,11 +1,11 @@
 import { Type } from '@nestjs/common';
 import { ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
+import { entries } from '@standardkit/core';
 import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Method } from '../constants';
 import { MethodType } from '../types';
 import { getDataProperties } from './get-data-properties';
 import { trueOrMethod } from './method-option.helpers';
-import { entries } from '@standardkit/core';
 
 export function defineRequestProperties<Entity>(
   request: Type,

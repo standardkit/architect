@@ -1,7 +1,7 @@
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiQuery } from '@nestjs/swagger';
-import { getSortableFields } from '../functions';
 import { SortOrder } from '@standardkit/core';
+import { getSortableFields } from '../functions';
 
 export function ApiSort<Entity>(entity: Type<Entity>): MethodDecorator {
   const sortableFields = getSortableFields(entity);
@@ -28,7 +28,7 @@ export function ApiSort<Entity>(entity: Type<Entity>): MethodDecorator {
         ),
         additionalProperties: false,
       },
-      description: `(Multi-)sort by fields: '${sortableFields.join("', '")}\'. Values: 'asc' or 'desc'`,
+      description: `(Multi-)sort by fields: '${sortableFields.join("', '")}'. Values: 'asc' or 'desc'`,
     }),
   );
 }

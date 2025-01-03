@@ -1,7 +1,7 @@
+import { camel, depascalize } from '@standardkit/caas';
 import { Relation } from '../constants';
 import { DataRelationOptions } from '../interfaces';
 import { RelationType } from '../types';
-import { camel, depascalize } from '@standardkit/caas';
 
 function isSingle(relation: RelationType): boolean {
   return ([Relation.ManyToOne, Relation.OneToOne] as RelationType[]).includes(relation);
